@@ -3,9 +3,8 @@
 // サンプル
 // 2014/03/13 N.Kobyasahi
 //
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
 
 // 必要なコンポーネントの列記
 [RequireComponent(typeof (Animator))]
@@ -17,15 +16,13 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 
 	public float animSpeed = 1.5f;				// アニメーション再生速度設定
 	public float lookSmoother = 3.0f;			// a smoothing setting for camera motion
-	public bool useCurves = true;               // Mecanimでカーブ調整を使うか設定する
-    // このスイッチが入っていないとカーブは使われない
-	public float useCurvesHeight = 0.5f;       // カーブ補正の有効高さ（地面をすり抜けやすい時には大きくする）
-    public Rigidbody rigidbody;
-    public int Idou = 0;
-    public Image yajirushi;
-    // 以下キャラクターコントローラ用パラメタ
-    // 前進速度
-    public float forwardSpeed = 7.0f;
+	public bool useCurves = true;				// Mecanimでカーブ調整を使うか設定する
+												// このスイッチが入っていないとカーブは使われない
+	public float useCurvesHeight = 0.5f;		// カーブ補正の有効高さ（地面をすり抜けやすい時には大きくする）
+
+	// 以下キャラクターコントローラ用パラメタ
+	// 前進速度
+	public float forwardSpeed = 7.0f;
 	// 後退速度
 	public float backwardSpeed = 2.0f;
 	// 旋回速度
@@ -41,11 +38,11 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 	private float orgColHight;
 	private Vector3 orgVectColCenter;
 	
-	private Animator anim;							// キャラにアタッチされるアニメーターへの参照
+	public Animator anim;							// キャラにアタッチされるアニメーターへの参照
 	private AnimatorStateInfo currentBaseState;			// base layerで使われる、アニメーターの現在の状態の参照
 
-	private GameObject cameraObject;	// メインカメラへの参照
-		
+	private GameObject cameraObject;    // メインカメラへの参照
+    public int Idou = 0;
 // アニメーター各ステートへの参照
 	static int idleState = Animator.StringToHash("Base Layer.Idle");
 	static int locoState = Animator.StringToHash("Base Layer.Locomotion");
@@ -65,7 +62,6 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		// CapsuleColliderコンポーネントのHeight、Centerの初期値を保存する
 		orgColHight = col.height;
 		orgVectColCenter = col.center;
-        yajirushi.enabled = false;
 }
 	
 	
@@ -79,10 +75,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 		anim.speed = animSpeed;								// Animatorのモーション再生速度に animSpeedを設定する
 		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);	// 参照用のステート変数にBase Layer (0)の現在のステートを設定する
 		rb.useGravity = true;//ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
-        if (transform.position.y <= 1.0f)
-        {
-            transform.position = new Vector3(2.59f, 3.73f, 4.99f);
-        }
+		
+		
 		
 		// 以下、キャラクターの移動処理
 		velocity = new Vector3(0, 0, v);		// 上下のキー入力からZ軸方向の移動量を取得
@@ -107,13 +101,16 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 				}
 			}
 		}
-        if (Idou==0) {
+
+        if (Idou == 0)
+        {
             // 上下のキー入力でキャラクターを移動させる
             transform.localPosition += velocity * Time.fixedDeltaTime;
 
             // 左右のキー入力でキャラクタをY軸で旋回させる
             transform.Rotate(0, h * rotateSpeed, 0);
         }
+
 		// 以下、Animatorの各ステート中での処理
 		// Locomotion中
 		// 現在のベースレイヤーがlocoStateの時
@@ -189,27 +186,8 @@ public class UnityChanControlScriptWithRgidBody : MonoBehaviour
 			}
 		}
 	}
-    [SerializeField]
-    private Message messageScript;
-    private string message = "このｹﾞｴむも完せいまじかだだあだｄったのni\n"
-                + "原因ふﾒｲのバグのせいdeシステムに異常ががｇ発生していﾙ\n"
-                + "このまﾏﾏまﾀﾞﾄこのゲームのシsissuステムはばぐにNOっとられﾃ壊れテしまう！\n"
-                + "頼mu！どうにかｼﾃバグを取り除iﾃくれないカ？";
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.name == "knight1")
-        {
-            foreach (ContactPoint point in collision.contacts)
-            yajirushi.transform.position = (Vector3)point.point;
-            yajirushi.enabled = !yajirushi.enabled;    
-            if (Input.GetKeyDown(KeyCode.X))
-             {
-                yajirushi.enabled = false;
-                messageScript.SetMessagePanel(message);    
-             }
-        }
-    }
-    void OnGUI()
+
+	void OnGUI()
 	{
 		GUI.Box(new Rect(Screen.width -260, 10 ,250 ,150), "Interaction");
 		GUI.Label(new Rect(Screen.width -245,30,250,30),"Up/Down Arrow : Go Forwald/Go Back");

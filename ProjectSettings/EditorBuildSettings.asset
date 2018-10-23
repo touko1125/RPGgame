@@ -8,13 +8,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Battle.unity
     guid: eb334c349dd507b489be43558b3a692d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Main.unity
     guid: 66764b47537a0b74eb38853f50931a3c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Battle1.unity
     guid: 1bc42652fe7557f44be07611c93754c0
+  - enabled: 1
+    path: Assets/Scenes/Battle.unity
+    guid: aed847739bce6c948916a7f1bdbdf8b3
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 43e7772685ee2dd41aa1d4f910ee48d8
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 952956318ed2d614992541171969e576
   m_configObjects: {}

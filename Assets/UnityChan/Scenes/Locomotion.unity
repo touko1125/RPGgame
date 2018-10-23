@@ -2056,6 +2056,7 @@ MonoBehaviour:
   backwardSpeed: 2
   rotateSpeed: 2
   jumpPower: 3
+  Idou: 0
 --- !u!54 &622748550
 Rigidbody:
   m_ObjectHideFlags: 0

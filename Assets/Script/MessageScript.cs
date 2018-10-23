@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Message : MonoBehaviour {
+public class MessageScript : MonoBehaviour {
     private Text messageText;
     private string message;
     private int maxTextLength = 140;
@@ -18,9 +18,7 @@ public class Message : MonoBehaviour {
     private float clickFlashTime = 0.3f;
     private bool isOneMessage = false;
     private bool isEndMessage = false;
-    private int time1 = 0;
-    public AudioSource sound;
-    public GameObject unitychan;
+     public GameObject unitychan;
     // Use this for initialization
     void Start()
     {
@@ -102,7 +100,7 @@ public class Message : MonoBehaviour {
                 if (nowTextNum >= message.Length)
                 {
                  gameObject.SetActive(false);
-                 unitychan.GetComponent<UnityChanControlScriptWithRgidBody>().Idou = 0;
+                 unitychan.GetComponent<UnitychanScript>().Idou = 0;
                     nowTextNum = 0;
                 isEndMessage = true;
                 transform.GetChild(0).gameObject.SetActive(false);
@@ -117,7 +115,7 @@ public class Message : MonoBehaviour {
     public void SetMessagePanel(string message)
     {
         gameObject.SetActive(true);
-        unitychan.GetComponent<UnityChanControlScriptWithRgidBody>().Idou = 1;
+        unitychan.GetComponent<UnitychanScript>().Idou = 1;
         SetMessage(message);
         transform.GetChild(0).gameObject.SetActive(true);
         isEndMessage = false;

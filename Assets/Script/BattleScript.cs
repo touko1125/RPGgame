@@ -10,12 +10,12 @@ public class BattleScript : MonoBehaviour {
     private string message;
     //　1回のメッセージの最大文字数
     [SerializeField]
-    private int maxTextLength = 90;
+    private int maxTextLength = 200;
     //　1回のメッセージの現在の文字数
     private int textLength = 0;
     //　メッセージの最大行数
     [SerializeField]
-    private int maxLine = 3;
+    private int maxLine = 5;
     //　現在の行
     private int nowLine = 0;
     //　テキストスピード
@@ -41,9 +41,6 @@ public class BattleScript : MonoBehaviour {
         clickIcon.enabled = false;
         messageText = GetComponentInChildren<Text>();
         messageText.text = "";
-        SetMessage("びー・JI・えむ男が現れた\n"
-            +"『今更バグを取り除こうとしてももう遅い！このゲームはもうバーグ様の支配下なのだ‼‼』\n"
-        );
     }
 
     void Update()
@@ -123,7 +120,6 @@ public class BattleScript : MonoBehaviour {
             //　マウスクリックされたら次の文字表示処理
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log(messageText.text.Length);
                 messageText.text = "";
                 nowLine = 0;
                 clickIcon.enabled = false;
